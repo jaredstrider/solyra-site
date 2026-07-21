@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solyra — Manifest Your Future</title>
+<meta name="description" content="Solyra creates a guided manifestation meditation that is yours alone. Share your vision, choose your voice, and practice becoming the person you see.">
+<meta property="og:title" content="Solyra — Manifest Your Future">
+<meta property="og:description" content="A daily guided meditation written from your own vision of your future self. Join the waitlist.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --night: #0A0A14; --night-2: #12121F; --night-3: #1B1B2E;
+    --violet: #8B7BF7; --blue: #5B8DEF; --rose: #C98BD9; --gold: #E8C687;
+    --text: #F2F0FA; --dim: #9B98B0; --success: #7FD4A8;
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--night); color: var(--text);
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-size: 18px; line-height: 1.6;
+    overflow-x: hidden;
+  }
+  .serif { font-family: 'Fraunces', Georgia, serif; font-weight: 300; letter-spacing: -0.01em; }
+
+  /* Starfield */
+  .stars { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+  .star { position: absolute; border-radius: 50%; background: var(--gold); animation: drift 60s linear infinite; }
+  @keyframes drift { from { transform: translateY(0); } to { transform: translateY(-40px); } }
+
+  main { position: relative; z-index: 1; }
+  section { max-width: 1060px; margin: 0 auto; padding: 96px 24px; }
+
+  /* Hero */
+  .hero { min-height: 92vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; }
+  .orb-wrap { position: relative; width: 120px; height: 120px; margin-bottom: 40px; }
+  .orb {
+    width: 120px; height: 120px; border-radius: 50%;
+    background: radial-gradient(circle at 50% 40%, #F6EFFF 0%, #C7B8FF 35%, var(--violet) 70%, var(--blue) 100%);
+    animation: breathe 5s var(--ease) infinite;
+  }
+  .orb-glow {
+    position: absolute; inset: -60px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(139,123,247,0.4) 0%, rgba(139,123,247,0) 70%);
+    animation: breathe 5s var(--ease) infinite;
+  }
+  @keyframes breathe { 0%,100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+  .hero h1 { font-size: clamp(42px, 7vw, 76px); line-height: 1.08; max-width: 800px; }
+  .hero h1 em { font-style: italic; background: linear-gradient(135deg, var(--blue), var(--violet), var(--rose)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hero .sub { color: var(--dim); font-size: clamp(17px, 2.4vw, 21px); max-width: 560px; margin: 24px auto 40px; }
+  .wordmark { font-size: 15px; letter-spacing: 0.42em; text-transform: uppercase; color: var(--gold); margin-bottom: 28px; font-weight: 500; }
+
+  /* Waitlist form */
+  .waitlist { display: flex; gap: 10px; width: 100%; max-width: 460px; }
+  .waitlist input {
+    flex: 1; padding: 16px 20px; border-radius: 14px; border: 1px solid var(--night-3);
+    background: var(--night-2); color: var(--text); font-size: 16px; font-family: inherit;
+    outline: none; transition: border-color 0.4s var(--ease);
+  }
+  .waitlist input:focus { border-color: var(--violet); }
+  .waitlist button {
+    padding: 16px 26px; border-radius: 14px; border: none; cursor: pointer;
+    background: linear-gradient(135deg, var(--blue), var(--violet)); color: #fff;
+    font-size: 16px; font-weight: 600; font-family: inherit; white-space: nowrap;
+    transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+  }
+  .waitlist button:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(139,123,247,0.35); }
+  .waitlist button:disabled { opacity: 0.6; cursor: wait; transform: none; }
+  .form-note { color: var(--dim); font-size: 13.5px; margin-top: 14px; }
+  .form-msg { margin-top: 14px; font-size: 15px; min-height: 22px; }
+  .form-msg.ok { color: var(--success); }
+  .form-msg.err { color: #E89B9B; }
+
+  /* Sections */
+  h2 { font-size: clamp(30px, 4.5vw, 42px); line-height: 1.15; margin-bottom: 16px; }
+  .lead { color: var(--dim); max-width: 620px; margin-bottom: 56px; }
+  .gold-line { width: 56px; height: 2px; background: var(--gold); opacity: 0.8; margin-bottom: 28px; border: none; }
+
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .step {
+    background: var(--night-2); border: 1px solid var(--night-3); border-radius: 20px;
+    padding: 36px 28px; transition: transform 0.5s var(--ease), border-color 0.5s var(--ease);
+  }
+  .step:hover { transform: translateY(-4px); border-color: rgba(139,123,247,0.4); }
+  .step .num { font-family: 'Fraunces', serif; font-size: 15px; color: var(--gold); letter-spacing: 0.2em; margin-bottom: 18px; }
+  .step h3 { font-size: 21px; margin-bottom: 10px; font-weight: 600; }
+  .step p { color: var(--dim); font-size: 16px; }
+
+  .features { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .feature { display: flex; gap: 18px; background: var(--night-2); border: 1px solid var(--night-3); border-radius: 20px; padding: 28px; }
+  .feature .dot { flex-shrink: 0; width: 10px; height: 10px; border-radius: 50%; background: var(--gold); margin-top: 9px; }
+  .feature h3 { font-size: 18px; font-weight: 600; margin-bottom: 6px; }
+  .feature p { color: var(--dim); font-size: 15.5px; }
+
+  .vision-quote {
+    text-align: center; font-size: clamp(26px, 4vw, 38px); line-height: 1.35;
+    max-width: 760px; margin: 0 auto; font-style: italic;
+  }
+  .vision-quote .who { display: block; font-family: 'Inter', sans-serif; font-style: normal; font-size: 14px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-top: 32px; }
+
+  .cta-final { text-align: center; display: flex; flex-direction: column; align-items: center; }
+
+  footer { border-top: 1px solid var(--night-3); padding: 40px 24px; text-align: center; color: var(--dim); font-size: 13.5px; position: relative; z-index: 1; }
+  footer p { max-width: 640px; margin: 0 auto 8px; }
+
+  @media (max-width: 760px) {
+    .steps, .features { grid-template-columns: 1fr; }
+    .waitlist { flex-direction: column; }
+    section { padding: 64px 20px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .orb, .orb-glow, .star { animation: none; }
+  }
+</style>
+</head>
+<body>
+<div class="stars" id="stars"></div>
+<main>
+  <section class="hero">
+    <div class="wordmark">Solyra</div>
+    <div class="orb-wrap"><div class="orb-glow"></div><div class="orb"></div></div>
+    <h1 class="serif">A meditation written from <em>your</em> future</h1>
+    <p class="sub">Share your vision of the person you're becoming. Solyra turns it into a guided manifestation meditation that is yours alone, in a voice you choose, ready every morning.</p>
+    <form class="waitlist" id="waitlistForm">
+      <input type="email" id="email" placeholder="Your email" required autocomplete="email">
+      <button type="submit" id="submitBtn">Join the waitlist</button>
+    </form>
+    <div class="form-msg" id="formMsg"></div>
+    <p class="form-note">Launching on iPhone. Early members get founding pricing.</p>
+  </section>
+
+  <section>
+    <hr class="gold-line">
+    <h2 class="serif">Three minutes to begin</h2>
+    <p class="lead">Most meditation apps hand you a library recorded for everyone, which means no one. Solyra starts with you.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="num">01</div>
+        <h3>Describe your vision</h3>
+        <p>A guided set of questions about your goals, the future self you can see, and what you're ready to let go of.</p>
+      </div>
+      <div class="step">
+        <div class="num">02</div>
+        <h3>Solyra writes your meditation</h3>
+        <p>Your words become a guided visualization: your scene, your name, your intentions, woven into a practice built on classic manifestation technique.</p>
+      </div>
+      <div class="step">
+        <div class="num">03</div>
+        <h3>Practice becoming</h3>
+        <p>A calm voice you choose guides you through it each day. As you grow, your meditation evolves with you.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <hr class="gold-line">
+    <h2 class="serif">Built for a daily ritual</h2>
+    <p class="lead">Manifestation works as a practice, not a wish. Solyra is designed around showing up.</p>
+    <div class="features">
+      <div class="feature"><div class="dot"></div><div><h3>Your voice, your length</h3><p>Male or female voices, sessions from 5 to 30 minutes, calming soundscapes under every word.</p></div></div>
+      <div class="feature"><div class="dot"></div><div><h3>The 30-day challenge</h3><p>A guided first month that turns visualization into a habit, with milestones along the way.</p></div></div>
+      <div class="feature"><div class="dot"></div><div><h3>Evening and sleep editions</h3><p>Long-play sleep manifestations that carry your vision into the quiet hours.</p></div></div>
+      <div class="feature"><div class="dot"></div><div><h3>A meditation that evolves</h3><p>Reflect after each session. Your practice listens, and next week's meditation grows with you.</p></div></div>
+    </div>
+  </section>
+
+  <section>
+    <p class="vision-quote serif">"Close your eyes. Three years from now, you wake up in the life you chose. Solyra helps you visit it every day, until living it feels natural."
+      <span class="who">The practice of becoming</span>
+    </p>
+  </section>
+
+  <section class="cta-final">
+    <hr class="gold-line" style="margin-left:auto;margin-right:auto;">
+    <h2 class="serif">Be first to practice</h2>
+    <p class="lead" style="text-align:center;margin-left:auto;margin-right:auto;">Solyra is in focused development. Waitlist members shape the practice and get founding pricing at launch.</p>
+    <form class="waitlist" id="waitlistForm2">
+      <input type="email" id="email2" placeholder="Your email" required autocomplete="email">
+      <button type="submit">Join the waitlist</button>
+    </form>
+    <div class="form-msg" id="formMsg2"></div>
+  </section>
+</main>
+
+<footer>
+  <p>Solyra is a guided visualization and meditation practice. It is not medical or mental-health care, and it makes no promises about life outcomes. It helps you practice seeing them.</p>
+  <p>© 2026 Solyra · <a href="mailto:hello@getsolyra.com" style="color:var(--dim)">hello@getsolyra.com</a></p>
+</footer>
+
+<script>
+  // Starfield
+  const stars = document.getElementById('stars');
+  for (let i = 0; i < 40; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const size = Math.random() * 2.5 + 1;
+    s.style.cssText = `width:${size}px;height:${size}px;left:${Math.random()*100}%;top:${Math.random()*100}%;opacity:${Math.random()*0.5+0.15};animation-delay:-${Math.random()*60}s`;
+    stars.appendChild(s);
+  }
+
+  // Waitlist — Supabase REST insert (configure before deploy)
+  const SUPABASE_URL = "https://swnncflzcpmtfzruuibx.supabase.co";
+  const SUPABASE_KEY = "sb_publishable_P57uI5iA7W3NeVFWU6zu8g_QqRE7f5z";
+
+  async function joinWaitlist(email) {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/solyra_waitlist`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Prefer': 'return=minimal' },
+      body: JSON.stringify({ email: email.toLowerCase().trim(), source: 'landing' })
+    });
+    if (!res.ok && res.status !== 409) throw new Error(`waitlist insert failed: ${res.status}`);
+  }
+
+  function wireForm(formId, emailId, msgId) {
+    const form = document.getElementById(formId);
+    const msg = document.getElementById(msgId);
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('button');
+      const email = document.getElementById(emailId).value;
+      btn.disabled = true; msg.className = 'form-msg';
+      msg.textContent = '';
+      try {
+        if (SUPABASE_URL.startsWith('__')) throw new Error('not configured');
+        await joinWaitlist(email);
+        msg.textContent = "You're on the list. Welcome to the practice.";
+        msg.classList.add('ok');
+        form.reset();
+      } catch (err) {
+        msg.textContent = 'Something went wrong. Please try again in a moment.';
+        msg.classList.add('err');
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  }
+  wireForm('waitlistForm', 'email', 'formMsg');
+  wireForm('waitlistForm2', 'email2', 'formMsg2');
+</script>
+</body>
+</html>
